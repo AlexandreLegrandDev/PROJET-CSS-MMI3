@@ -1,41 +1,206 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    base.css — Layer « base »
    Rôle : styles par défaut des ÉLÉMENTS HTML (body, titres, liens, focus…).
    Pas de classes ici : seulement des sélecteurs d'éléments, :where(), :is().
    N'utilisez que des tokens SÉMANTIQUES.
+   Les grilles, fonds de sections et variantes de cartes restent dans
+   layout.css et components.css. Base mobile, typographie fluide via tokens.
    ========================================================================== */
 
 @layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    accent-color: var(--color-accent);
+    scroll-padding-block-start: var(--space-anchor);
+  }
+
   body {
     background-color: var(--color-surface);
     color: var(--color-text);
     font-family: var(--font-sans);
     font-size: var(--font-size-body);
-    line-height: 1.6;
+    line-height: var(--line-height-body);
+    overflow-wrap: anywhere;
+  }
+
+  :where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    line-height: var(--line-height-heading);
+    text-transform: uppercase;
+    text-wrap: balance;
   }
 
   h1 {
     font-size: var(--font-size-h1);
-    line-height: 1.1;
+    letter-spacing: var(--letter-spacing-display);
   }
 
-  /* Exemple de :where() : spécificité nulle, facile à surcharger (exigence 4) */
-  :where(h1, h2, h3) {
-    text-wrap: balance;
+  h2 {
+    font-size: var(--font-size-h2);
+    letter-spacing: var(--letter-spacing-heading);
+  }
+
+  h3 {
+    font-size: var(--font-size-h3);
+  }
+
+  :where(h4, h5, h6) {
+    font-size: var(--font-size-subheading);
+  }
+
+  /* Le sous-titre du programme doit rester distinct du titre condensé. */
+  :where(h1, h2, h3) small {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-strong);
+    letter-spacing: normal;
+    line-height: var(--line-height-body);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :where(p + p) {
+    margin-block-start: var(--space-text);
+  }
+
+  :where(strong, b) {
+    font-weight: var(--font-weight-strong);
+  }
+
+  small {
+    font-size: var(--font-size-small);
+  }
+
+  address {
+    font-style: normal;
+  }
+
+  time {
+    font-variant-numeric: tabular-nums;
   }
 
   a {
-    color: var(--color-accent);
+    color: var(--color-link);
+    text-decoration-thickness: var(--border-width-default);
+    text-underline-offset: var(--space-underline);
+    transition: color var(--duration-hover) var(--ease-interaction);
+
+    &:hover {
+      color: var(--color-link-hover);
+    }
   }
 
-  /* Exigence 7 : un focus TOUJOURS visible au clavier.
-     Ne jamais supprimer l'outline sans le remplacer. */
+  /* Les listes de contenu gardent leurs puces ; le reset traite role="list". */
+  :where(ul, ol):not([role="list"]) {
+    margin-block: var(--space-list);
+    padding-inline-start: var(--space-list-indent);
+  }
+
+  :where(li + li) {
+    margin-block-start: var(--space-list-item);
+  }
+
+  :where(button, input, select, textarea) {
+    font: inherit;
+    color: inherit;
+  }
+
+  :where(button, select, textarea, input:not([type="checkbox"], [type="radio"])) {
+    max-inline-size: 100%;
+    min-block-size: var(--size-control);
+    border: var(--border-width-default) solid var(--color-border);
+    border-radius: var(--radius-control);
+    padding: var(--space-control-block) var(--space-control-inline);
+  }
+
+  :where(input, select, textarea) {
+    background-color: var(--color-surface-raised);
+  }
+
+  :where(input[type="checkbox"], input[type="radio"]) {
+    accent-color: var(--color-accent);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  button {
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+    font-weight: var(--font-weight-strong);
+    line-height: var(--line-height-control);
+    cursor: pointer;
+    transition: background-color var(--duration-hover) var(--ease-interaction);
+
+    &:hover:enabled {
+      background-color: var(--color-accent-hover);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: var(--opacity-disabled);
+    }
+  }
+
+  :where(input, textarea)::placeholder {
+    color: var(--color-text-muted);
+    opacity: 1;
+  }
+
+  label {
+    cursor: pointer;
+  }
+
+  details {
+    border: var(--border-width-default) solid var(--color-border);
+    border-radius: var(--radius-disclosure);
+  }
+
+  summary {
+    padding: var(--space-disclosure-block) var(--space-disclosure-inline);
+    font-weight: var(--font-weight-strong);
+    cursor: pointer;
+
+    &::marker {
+      color: var(--color-accent);
+    }
+  }
+
+  details > p {
+    padding: var(--space-disclosure-block) var(--space-disclosure-inline);
+  }
+
+  hr {
+    border: 0;
+    border-block-start: var(--border-width-default) solid var(--color-border);
+    margin-block: var(--space-divider);
+  }
+
+  ::selection {
+    background-color: var(--color-selection);
+    color: var(--color-on-selection);
+  }
+
+  /* Exigence 7 : conserver un focus visible au clavier. */
   :focus-visible {
-    outline: 3px solid var(--color-focus);
-    outline-offset: 3px;
+    outline: var(--border-width-focus) solid var(--color-focus);
+    outline-offset: var(--space-focus-offset);
   }
 
-  /* TODO : h2, h3, listes, boutons natifs, ::selection…
-     TODO (exigence 6) : neutraliser les mouvements globalement si besoin :
-     @media (prefers-reduced-motion: reduce) { … } */
+  /* Exigence 6 : neutraliser les mouvements, y compris dans les autres layers.
+     Une priorité est nécessaire ici pour dépasser leurs futures animations. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
