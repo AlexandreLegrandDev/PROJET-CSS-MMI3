@@ -1,17 +1,20 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bass-Cour — Festival électronique en plein champ</title>
   <meta name="description" content="Bass-Cour, festival électronique en plein champ les 18 et 19 juin 2027 à la Ferme des Silos, Arras. Deux jours, deux scènes et six artistes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
   <header class="site-header">
     <a href="#top" class="site-header__logo">BASS-COUR</a>
-    <!-- Une navigation commune aux deux formats ; son affichage mobile sera traité en CSS. -->
-    <nav id="navigation-principale" aria-label="Navigation principale">
+    <!-- Navigation desktop et menu mobile natif sans JavaScript. -->
+    <nav class="site-header__nav" id="navigation-principale" aria-label="Navigation principale">
       <ul role="list">
         <li><a href="#programme">Programme</a></li>
         <li><a href="#intervenants">Artistes</a></li>
@@ -21,12 +24,12 @@
     </nav>
     <label class="theme-toggle">
       <span aria-hidden="true">☀</span>
-      <input type="checkbox" id="theme-toggle" name="theme-sombre">
-      <span>Thème sombre</span>
+      <input type="checkbox" id="theme-toggle" name="theme-sombre" role="switch">
+      <span class="u-visually-hidden">Thème sombre</span>
       <span aria-hidden="true">☾</span>
     </label>
     <button class="menu-toggle" type="button" popovertarget="menu-mobile" aria-label="Ouvrir le menu de navigation">☰</button>
-    <nav id="menu-mobile" popover aria-label="Navigation mobile">
+    <nav class="mobile-menu" id="menu-mobile" popover aria-label="Navigation mobile">
       <button type="button" popovertarget="menu-mobile" popovertargetaction="hide">Fermer le menu</button>
       <ul role="list">
         <li><a href="#programme">Programme</a></li>

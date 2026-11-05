@@ -149,3 +149,34 @@
     --opacity-disabled: 0.55;
   }
 }
+
+@layer base {
+  :root {
+    --color-header-surface: var(--color-ink-950);
+    --color-header-text: var(--color-cream-100);
+    --color-header-border: var(--color-stone-600);
+    --color-header-focus: var(--color-lime-400);
+    --space-header-inline: clamp(1rem, 4.5vw, 3.5rem);
+    --space-header-gap: clamp(0.5rem, 2vw, 2rem);
+    --size-header: 3.5rem;
+    --font-size-logo: clamp(1.75rem, 1.1rem + 2vw, 2.5rem);
+    --font-size-navigation: 1rem;
+    --size-theme-track: 2.25rem;
+    --size-theme-height: 1.125rem;
+    --size-theme-thumb: 0.875rem;
+    --space-theme-inset: 0.125rem;
+    --radius-switch: 100vmax;
+    --size-menu-icon: 1.5rem;
+    --size-menu-width: 22rem;
+    --space-menu-edge: 1rem;
+  }
+
+  /* État initial clair : le bouton choisit explicitement le thème sombre. */
+  :root {
+    color-scheme: light;
+  }
+
+  :root:has(#theme-toggle:checked) {
+    color-scheme: dark;
+  }
+}

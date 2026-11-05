@@ -32,3 +32,125 @@
      TODO : .offer et .offer:has(.offer__badge) (exigence 4)
      TODO : .faq-item (details/summary), .nav, @keyframes… */
 }
+
+@layer components {
+  .site-header {
+    background-color: var(--color-header-surface);
+    color: var(--color-header-text);
+    border-block-end: var(--border-width-default) solid var(--color-header-border);
+    /* Le focus reste lumineux sur ce fond noir dans les deux thèmes. */
+    --color-focus: var(--color-header-focus);
+
+    & a {
+      color: var(--color-header-text);
+      text-decoration: none;
+
+      &:hover {
+        color: var(--color-accent);
+      }
+    }
+
+    & li + li {
+      margin-block-start: 0;
+    }
+  }
+
+  .site-header__logo {
+    flex-shrink: 0;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: var(--font-size-logo);
+    line-height: var(--line-height-heading);
+    letter-spacing: var(--letter-spacing-display);
+  }
+
+  .site-header__nav a {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--size-control);
+    font-size: var(--font-size-navigation);
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-control-block);
+    min-block-size: var(--size-control);
+    flex-shrink: 0;
+
+    & input {
+      appearance: none;
+      position: relative;
+      inline-size: var(--size-theme-track);
+      block-size: var(--size-theme-height);
+      margin: 0;
+      border: var(--border-width-default) solid var(--color-accent);
+      border-radius: var(--radius-switch);
+      background-color: var(--color-accent);
+      cursor: pointer;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset-block-start: var(--space-theme-inset);
+        inset-inline-start: var(--space-theme-inset);
+        inline-size: var(--size-theme-thumb);
+        block-size: var(--size-theme-thumb);
+        border-radius: var(--radius-switch);
+        background-color: var(--color-header-surface);
+        transition: translate var(--duration-hover) var(--ease-interaction);
+      }
+
+      &:checked::before {
+        translate: calc(var(--size-theme-track) - var(--size-theme-thumb) - 2 * var(--space-theme-inset) - 2 * var(--border-width-default)) 0;
+      }
+    }
+  }
+
+  .menu-toggle {
+    place-items: center;
+    flex-shrink: 0;
+    min-inline-size: var(--size-control);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-header-text);
+    font-size: var(--size-menu-icon);
+
+    &:hover:enabled {
+      background: transparent;
+      color: var(--color-accent);
+    }
+  }
+
+  .mobile-menu {
+    position: fixed;
+    inset: var(--size-header) var(--space-menu-edge) auto auto;
+    inline-size: min(var(--size-menu-width), calc(100% - 2 * var(--space-menu-edge)));
+    max-block-size: calc(100dvh - var(--size-header) - var(--space-menu-edge));
+    overflow-y: auto;
+    margin: var(--space-menu-edge) 0 0;
+    padding: var(--space-control-inline);
+    border: var(--border-width-default) solid var(--color-header-border);
+    border-radius: var(--radius-control);
+    background-color: var(--color-header-surface);
+    color: var(--color-header-text);
+
+    & ul {
+      margin-block-start: var(--space-text);
+    }
+
+    & a {
+      display: flex;
+      align-items: center;
+      min-block-size: var(--size-control);
+      padding-inline: var(--space-control-inline);
+    }
+
+    @media (width >= 48rem) {
+      &:popover-open {
+        display: none;
+      }
+    }
+  }
+}

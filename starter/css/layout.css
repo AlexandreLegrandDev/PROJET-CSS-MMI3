@@ -46,3 +46,46 @@
      TODO (exigence 3) : déclarer le conteneur de votre container query,
      ex. .speakers { container: speakers / inline-size; } */
 }
+
+@layer layout {
+  .site-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-header-gap);
+    min-block-size: var(--size-header);
+    padding-inline: var(--space-header-inline);
+
+    & > .site-header__nav {
+      display: none;
+    }
+
+    & > .theme-toggle {
+      margin-inline-start: auto;
+    }
+
+    & > .menu-toggle {
+      display: inline-grid;
+    }
+
+    @media (width >= 48rem) {
+      & > .site-header__nav {
+        display: block;
+        margin-inline-start: auto;
+      }
+
+      & > .theme-toggle {
+        margin-inline-start: var(--space-header-gap);
+      }
+
+      & > .menu-toggle {
+        display: none;
+      }
+    }
+  }
+
+  .site-header__nav ul {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 4vw, 3rem);
+  }
+}
