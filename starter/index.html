@@ -1,36 +1,36 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- TODO : nom de votre événement -->
-  <title>NOM DE L'ÉVÉNEMENT — Projet noté — Site vitrine d'un événement</title>
-  <meta name="description" content="TODO : une phrase qui présente l'événement.">
-
-  <!-- Polices (facultatif) : Google Fonts autorisé via <link>, ex.
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=...&display=swap">
-  -->
-
-  <!-- Un SEUL fichier CSS lié : main.css déclare l'ordre des layers et importe le reste -->
+  <title>Bass-Cour — Festival électronique en plein champ</title>
+  <meta name="description" content="Bass-Cour, festival électronique en plein champ les 18 et 19 juin 2027 à la Ferme des Silos, Arras. Deux jours, deux scènes et six artistes.">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-
-  <!-- ============================================================
-       EN-TÊTE : logo/nom + navigation vers les sections (ancres)
-       Flexbox (exigence 2). Menu mobile sans JS : Popover API,
-       <details> ou case à cocher + :has().
-       BONUS TECHNIQUE (exigence 5) : bascule de thème CSS-only, ex.
-       <label><input type="checkbox" id="theme-toggle"> Thème sombre</label>
-       ============================================================ -->
   <header class="site-header">
-    <a href="#top" class="site-header__logo">NOM DE L'ÉVÉNEMENT</a>
-    <nav aria-label="Navigation principale">
+    <a href="#top" class="site-header__logo">BASS-COUR</a>
+    <!-- Une navigation commune aux deux formats ; son affichage mobile sera traité en CSS. -->
+    <nav id="navigation-principale" aria-label="Navigation principale">
       <ul role="list">
         <li><a href="#programme">Programme</a></li>
-        <li><a href="#intervenants">Intervenants</a></li>
+        <li><a href="#intervenants">Artistes</a></li>
+        <li><a href="#billetterie">Billetterie</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <label class="theme-toggle">
+      <span aria-hidden="true">☀</span>
+      <input type="checkbox" id="theme-toggle" name="theme-sombre">
+      <span>Thème sombre</span>
+      <span aria-hidden="true">☾</span>
+    </label>
+    <button class="menu-toggle" type="button" popovertarget="menu-mobile" aria-label="Ouvrir le menu de navigation">☰</button>
+    <nav id="menu-mobile" popover aria-label="Navigation mobile">
+      <button type="button" popovertarget="menu-mobile" popovertargetaction="hide">Fermer le menu</button>
+      <ul role="list">
+        <li><a href="#programme">Programme</a></li>
+        <li><a href="#intervenants">Artistes</a></li>
         <li><a href="#billetterie">Billetterie</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
@@ -38,80 +38,226 @@
   </header>
 
   <main id="top">
-
-    <!-- ============================================================
-         HERO : le SEUL <h1> de la page, date(s), lieu, accroche,
-         appel à l'action vers #billetterie.
-         Idées : grid-template-areas, @keyframes d'apparition (pensez
-         à prefers-reduced-motion), titre en clamp().
-         ============================================================ -->
     <section class="hero" aria-labelledby="hero-titre">
-      <h1 id="hero-titre">NOM DE L'ÉVÉNEMENT</h1>
-      <!-- TODO : <p> date + lieu (élément <time datetime="…">), accroche -->
-      <a href="#billetterie" class="btn">Réserver ma place</a>
+      <!-- Visuel de la grange à ajouter lorsque le fichier image sera disponible. -->
+      <p class="hero__eyebrow">Festival électronique en plein champ</p>
+      <h1 id="hero-titre">BASS-COUR</h1>
+      <p class="hero__tagline">On retourne la grange.</p>
+      <p class="hero__infos">
+        <time datetime="2027-06-18">18</time>–<time datetime="2027-06-19">19 juin 2027</time>
+        · <span>Ferme des Silos, Arras</span>
+      </p>
+      <div class="hero__actions">
+        <a href="#billetterie" class="btn">Réserver ma place <span aria-hidden="true">↗</span></a>
+        <a href="#programme" class="btn btn--secondary">Voir le programme <span aria-hidden="true">↓</span></a>
+      </div>
     </section>
 
-    <!-- ============================================================
-         PROGRAMME EN GRILLE : ≥ 6 créneaux, sur 2 jours ou 2 scènes.
-         Exigence 2 : grid-template-areas (exemple fourni dans
-         layout.css : zones "titre", "jour1", "jour2") et/ou subgrid.
-         Chaque créneau : <time>, titre, lieu/scène.
-         ============================================================ -->
     <section id="programme" class="section programme" aria-labelledby="programme-titre">
-      <h2 id="programme-titre">Programme</h2>
-      <!-- TODO : jour 1 (grid-area: jour1) : <h3> + liste de créneaux -->
-      <!-- TODO : jour 2 (grid-area: jour2) : <h3> + liste de créneaux -->
+      <h2 id="programme-titre">Le programme <small>02 jours / 02 scènes</small></h2>
+      <section class="programme__jour programme__jour--vendredi" aria-labelledby="vendredi-titre">
+        <h3 id="vendredi-titre"><time datetime="2027-06-18">Vendredi 18 juin</time></h3>
+        <ul class="programme__creneaux" role="list">
+          <li><time datetime="2027-06-18T18:00">18:00</time> <strong>Ouverture des portes</strong> <span>La Cour</span></li>
+          <li><time datetime="2027-06-18T20:00">20:00</time> <strong>Bass session</strong> <span>La Grange</span></li>
+          <li><time datetime="2027-06-18T23:00">23:00</time> <strong>Rave nocturne</strong> <span>Le Silo</span></li>
+        </ul>
+      </section>
+      <section class="programme__jour programme__jour--samedi" aria-labelledby="samedi-titre">
+        <h3 id="samedi-titre"><time datetime="2027-06-19">Samedi 19 juin</time></h3>
+        <ul class="programme__creneaux" role="list">
+          <li><time datetime="2027-06-19T17:00">17:00</time> <strong>Retour au pré</strong> <span>La Cour</span></li>
+          <li><time datetime="2027-06-19T20:30">20:30</time> <strong>Dubstep session</strong> <span>La Grange</span></li>
+          <li><time datetime="2027-06-20T00:00">00:00</time> <strong>Dernier labour</strong> <span>Le Silo</span></li>
+        </ul>
+      </section>
     </section>
 
-    <!-- ============================================================
-         INTERVENANTS / ARTISTES EN CARTES : ≥ 6 cartes.
-         Carte = <article> : image (alt pertinent !), nom (<h3>), rôle,
-         bio, lien. Exigence 2 : subgrid pour aligner les contenus.
-         Exigence 3 : composant piloté par container query, utilisé
-         dans DEUX contextes de largeurs différentes.
-         ============================================================ -->
     <section id="intervenants" class="section speakers" aria-labelledby="intervenants-titre">
-      <h2 id="intervenants-titre">Intervenants</h2>
-      <!-- TODO : <ul role="list"> de <li><article class="card">…</article></li> -->
+      <h2 id="intervenants-titre">Le troupeau arrive.</h2>
+      <p class="speakers__intro">Six artistes. Une grange à retourner.</p>
+      <!-- Ajouter les six visuels décoratifs des cartes quand les fichiers seront disponibles. -->
+      <ul class="speakers__list" role="list">
+        <li>
+          <article class="card" aria-labelledby="artiste-01-titre">
+            <div class="card__visual card__visual--01" aria-hidden="true"></div>
+            <header class="card__header">
+              <span class="card__number" aria-hidden="true">01</span>
+              <h3 id="artiste-01-titre">Artiste 01</h3>
+              <p class="card__role">À annoncer</p>
+            </header>
+            <p class="card__bio">Portrait et présentation à venir.<br>Portrait et présentation à venir.</p>
+            <details class="card__details">
+              <summary>Découvrir <span class="sr-only">l'artiste 01</span> <span aria-hidden="true">→</span></summary>
+              <p>La présentation de cet artiste sera dévoilée prochainement.</p>
+            </details>
+          </article>
+        </li>
+        <li>
+          <article class="card" aria-labelledby="artiste-02-titre">
+            <div class="card__visual card__visual--02" aria-hidden="true"></div>
+            <header class="card__header">
+              <span class="card__number" aria-hidden="true">02</span>
+              <h3 id="artiste-02-titre">Artiste 02</h3>
+              <p class="card__role">À annoncer</p>
+            </header>
+            <p class="card__bio">Portrait et présentation à venir.<br>Portrait et présentation à venir.</p>
+            <details class="card__details">
+              <summary>Découvrir <span class="sr-only">l'artiste 02</span> <span aria-hidden="true">→</span></summary>
+              <p>La présentation de cet artiste sera dévoilée prochainement.</p>
+            </details>
+          </article>
+        </li>
+        <li>
+          <article class="card" aria-labelledby="artiste-03-titre">
+            <div class="card__visual card__visual--03" aria-hidden="true"></div>
+            <header class="card__header">
+              <span class="card__number" aria-hidden="true">03</span>
+              <h3 id="artiste-03-titre">Artiste 03</h3>
+              <p class="card__role">À annoncer</p>
+            </header>
+            <p class="card__bio">Portrait et présentation à venir.<br>Portrait et présentation à venir.</p>
+            <details class="card__details">
+              <summary>Découvrir <span class="sr-only">l'artiste 03</span> <span aria-hidden="true">→</span></summary>
+              <p>La présentation de cet artiste sera dévoilée prochainement.</p>
+            </details>
+          </article>
+        </li>
+        <li>
+          <article class="card" aria-labelledby="artiste-04-titre">
+            <div class="card__visual card__visual--04" aria-hidden="true"></div>
+            <header class="card__header">
+              <span class="card__number" aria-hidden="true">04</span>
+              <h3 id="artiste-04-titre">Artiste 04</h3>
+              <p class="card__role">À annoncer</p>
+            </header>
+            <p class="card__bio">Portrait et présentation à venir.<br>Portrait et présentation à venir.</p>
+            <details class="card__details">
+              <summary>Découvrir <span class="sr-only">l'artiste 04</span> <span aria-hidden="true">→</span></summary>
+              <p>La présentation de cet artiste sera dévoilée prochainement.</p>
+            </details>
+          </article>
+        </li>
+        <li>
+          <article class="card" aria-labelledby="artiste-05-titre">
+            <div class="card__visual card__visual--05" aria-hidden="true"></div>
+            <header class="card__header">
+              <span class="card__number" aria-hidden="true">05</span>
+              <h3 id="artiste-05-titre">Artiste 05</h3>
+              <p class="card__role">À annoncer</p>
+            </header>
+            <p class="card__bio">Portrait et présentation à venir.<br>Portrait et présentation à venir.</p>
+            <details class="card__details">
+              <summary>Découvrir <span class="sr-only">l'artiste 05</span> <span aria-hidden="true">→</span></summary>
+              <p>La présentation de cet artiste sera dévoilée prochainement.</p>
+            </details>
+          </article>
+        </li>
+        <li>
+          <article class="card" aria-labelledby="artiste-06-titre">
+            <div class="card__visual card__visual--06" aria-hidden="true"></div>
+            <header class="card__header">
+              <span class="card__number" aria-hidden="true">06</span>
+              <h3 id="artiste-06-titre">Artiste 06</h3>
+              <p class="card__role">À annoncer</p>
+            </header>
+            <p class="card__bio">Portrait et présentation à venir.<br>Portrait et présentation à venir.</p>
+            <details class="card__details">
+              <summary>Découvrir <span class="sr-only">l'artiste 06</span> <span aria-hidden="true">→</span></summary>
+              <p>La présentation de cet artiste sera dévoilée prochainement.</p>
+            </details>
+          </article>
+        </li>
+      </ul>
     </section>
 
-    <!-- ============================================================
-         BILLETTERIE : ≥ 3 offres (prix, contenu, bouton), une offre
-         mise en avant. Exigence 4 : idéal pour :has(), ex.
-         .offer:has(.offer__badge) { … }
-         ============================================================ -->
-    <section id="billetterie" class="section" aria-labelledby="billetterie-titre">
-      <h2 id="billetterie-titre">Billetterie</h2>
-      <!-- TODO : liste d'offres -->
+    <section id="billetterie" class="section tickets" aria-labelledby="billetterie-titre">
+      <h2 id="billetterie-titre">Choisis ton pass.</h2>
+      <!-- Liens provisoires vers le contact, à remplacer par la billetterie définitive. -->
+      <ul class="tickets__list" role="list">
+        <li>
+          <article class="offer" aria-labelledby="pass-1-jour-titre">
+            <h3 id="pass-1-jour-titre">Pass 1 jour</h3>
+            <p class="offer__price">39 €</p>
+            <ul>
+              <li>Vendredi ou samedi</li>
+              <li>Accès aux deux scènes</li>
+              <li>Restauration sur place</li>
+            </ul>
+            <a href="#contact" class="btn" aria-label="Prendre mon pass 1 jour à 39 euros">Prendre mon pass <span aria-hidden="true">↗</span></a>
+          </article>
+        </li>
+        <li>
+          <article class="offer offer--featured" aria-labelledby="pass-2-jours-titre">
+            <p class="offer__badge">Le plus rentable</p>
+            <h3 id="pass-2-jours-titre">Pass 2 jours</h3>
+            <p class="offer__price">69 €</p>
+            <ul>
+              <li>Vendredi + samedi</li>
+              <li>Accès aux deux scènes</li>
+              <li>Deux nuits de basses</li>
+            </ul>
+            <a href="#contact" class="btn" aria-label="Prendre mon pass 2 jours à 69 euros">Prendre mon pass <span aria-hidden="true">↗</span></a>
+          </article>
+        </li>
+        <li>
+          <article class="offer" aria-labelledby="pass-grange-titre">
+            <h3 id="pass-grange-titre">Pass Grange +</h3>
+            <p class="offer__price">99 €</p>
+            <ul>
+              <li>Les deux jours</li>
+              <li>Camping inclus</li>
+              <li>Affiche du festival</li>
+            </ul>
+            <a href="#contact" class="btn" aria-label="Prendre mon pass Grange plus à 99 euros">Prendre mon pass <span aria-hidden="true">↗</span></a>
+          </article>
+        </li>
+      </ul>
     </section>
 
-    <!-- ============================================================
-         FAQ : ≥ 5 questions en <details>/<summary> (pas de JS !).
-         Exigence 6 : une transition à l'ouverture est bienvenue.
-         ============================================================ -->
-    <section id="faq" class="section" aria-labelledby="faq-titre">
-      <h2 id="faq-titre">Questions fréquentes</h2>
-      <!-- TODO :
-      <details class="faq-item">
-        <summary>Question ?</summary>
-        <p>Réponse.</p>
-      </details>
-      -->
+    <section id="faq" class="section faq" aria-labelledby="faq-titre">
+      <h2 id="faq-titre">Avant de mettre les bottes.</h2>
+      <div class="faq__list">
+        <details class="faq-item" open>
+          <summary>Comment venir au festival ?</summary>
+          <p>Navettes depuis Arras et parking vélo sur place.</p>
+        </details>
+        <!-- Les réponses suivantes ne sont pas visibles sur la maquette : à compléter. -->
+        <details class="faq-item">
+          <summary>Peut-on camper sur place ?</summary>
+          <p>Le camping est inclus dans le Pass Grange +. Les modalités seront précisées prochainement.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Le site est-il accessible aux personnes à mobilité réduite ?</summary>
+          <p>Les informations d’accessibilité seront précisées prochainement.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Que peut-on apporter ?</summary>
+          <p>La liste des objets autorisés sera communiquée prochainement.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Les animaux sont-ils les bienvenus ?</summary>
+          <p>Les conditions d’accueil des animaux seront précisées prochainement.</p>
+        </details>
+      </div>
     </section>
-
   </main>
 
-  <!-- ============================================================
-       FOOTER : contact, réseaux (fictifs), mention « événement
-       fictif — projet étudiant », crédits des images et polices.
-       ============================================================ -->
   <footer class="site-footer">
-    <p>Événement fictif — projet étudiant, module CSS avancé.</p>
-    <!-- TODO : contact, réseaux, crédits -->
+    <a href="#top" class="site-footer__logo">BASS-COUR</a>
+    <p class="site-footer__tagline">On retourne la grange.</p>
+    <address id="contact" class="site-footer__contact">
+      <a href="mailto:bonjour@bass-cour.example">bonjour@bass-cour.example</a>
+    </address>
+    <!-- Ajouter les URL des réseaux lorsque les comptes seront disponibles. -->
+    <ul class="site-footer__links" role="list">
+      <li><span>Instagram</span></li>
+      <li><span>TikTok</span></li>
+      <li><a href="mailto:bonjour@bass-cour.example">Contact</a></li>
+    </ul>
+    <p>Événement fictif — projet étudiant</p>
+    <p>Polices : Barlow Condensed &amp; Space Grotesk</p>
+    <p>Visuels générés par IA</p>
   </footer>
-
-  <!-- JavaScript facultatif (≤ 20 lignes, justifié dans le README) :
-  <script src="js/main.js" defer></script>
-  -->
 </body>
 </html>
