@@ -21,14 +21,16 @@
      Mobile : une colonne. Desktop : deux jours côte à côte. */
   .programme {
     display: grid;
-    gap: var(--space-6);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-programme-gap);
+    padding: var(--space-programme-block) var(--space-header-inline);
     grid-template-areas:
       "titre"
       "jour1"
       "jour2";
 
     @media (width >= 48rem) {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-areas:
         "titre titre"
         "jour1 jour2";
@@ -37,8 +39,18 @@
     /* Chaque enfant se place dans sa zone nommée */
     & > h2 {
       grid-area: titre;
+      display: flex;
+      align-items: center;
+      gap: var(--space-programme-title-gap);
     }
-    /* TODO : placer les blocs des jours dans "jour1" et "jour2" */
+
+    & > .programme__jour--vendredi {
+      grid-area: jour1;
+    }
+
+    & > .programme__jour--samedi {
+      grid-area: jour2;
+    }
   }
 
   /* TODO : .site-header (Flexbox), .hero, grille des intervenants

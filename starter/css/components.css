@@ -249,3 +249,101 @@
     }
   }
 }
+
+@layer components {
+  .programme {
+    background-color: var(--color-programme-surface);
+    color: var(--color-programme-text);
+
+    & > h2 {
+      font-size: var(--font-size-programme-title);
+
+      & > span {
+        flex-shrink: 0;
+      }
+
+      & small {
+        flex-shrink: 0;
+        padding-inline-start: var(--space-programme-title-gap);
+        border-inline-start: var(--border-width-default) solid var(--color-border);
+        font-size: var(--font-size-programme-subtitle);
+        line-height: var(--line-height-control);
+      }
+
+      &::after {
+        content: "";
+        flex: 0 1 var(--size-programme-stripes);
+        min-inline-size: 0;
+        block-size: var(--space-control-inline);
+        margin-inline-start: auto;
+        background: repeating-linear-gradient(
+          -45deg,
+          transparent 0 0.4rem,
+          var(--color-programme-stripes) 0.4rem 0.9rem
+        );
+      }
+    }
+  }
+
+  .programme__jour {
+    min-inline-size: 0;
+    border: var(--border-width-default) solid var(--color-border);
+
+    & h3 {
+      display: flex;
+      align-items: center;
+      gap: var(--space-control-block);
+      padding: var(--space-programme-cell);
+      background-color: var(--color-programme-day);
+      color: var(--color-programme-day-text);
+      font-size: var(--font-size-programme-day);
+    }
+  }
+
+  .programme__calendar {
+    inline-size: 1em;
+    block-size: 1em;
+    flex-shrink: 0;
+  }
+
+  .programme__creneaux {
+    & > li {
+      display: grid;
+      grid-template-columns: var(--size-programme-time) minmax(0, 1fr) var(--size-programme-location);
+      align-items: center;
+      gap: var(--space-programme-cell);
+      margin: 0;
+      padding: var(--space-programme-cell);
+      font-size: var(--font-size-programme-row);
+      line-height: var(--line-height-control);
+
+      & + li {
+        border-block-start: var(--border-width-default) solid var(--color-border);
+      }
+
+      & > time {
+        border-inline-end: var(--border-width-default) solid var(--color-border);
+        font-family: var(--font-heading);
+        font-size: var(--font-size-programme-time);
+        font-weight: var(--font-weight-strong);
+      }
+
+      & > span {
+        display: flex;
+        align-items: center;
+        gap: var(--space-control-block);
+
+        /* Repère de lieu décoratif ; le nom reste du texte accessible. */
+        &::before {
+          content: "";
+          flex-shrink: 0;
+          inline-size: var(--size-programme-pin);
+          block-size: var(--size-programme-pin);
+          border: var(--border-width-programme-pin) solid currentColor;
+          border-radius: 50% 50% 0 50%;
+          rotate: 45deg;
+        }
+      }
+    }
+  }
+}
