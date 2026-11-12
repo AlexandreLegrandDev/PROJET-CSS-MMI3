@@ -154,3 +154,98 @@
     }
   }
 }
+
+@layer components {
+  .hero {
+    background-color: var(--color-hero-surface);
+    color: var(--color-hero-text);
+    --color-focus: var(--color-accent);
+    background-image: url("https://static.vecteezy.com/ti/photos-gratuite/p1/48637923-grange-dans-prairie-en-dessous-de-nuit-ciel-gratuit-photo.jpg");
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+
+    & > h1 {
+      max-inline-size: 100%;
+      font-size: var(--font-size-hero-title);
+      line-height: var(--line-height-heading);
+    }
+
+    /* Le rythme vertical est géré par le gap du hero. */
+    & > p {
+      margin-block: 0;
+    }
+  }
+
+  .hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-control-inline);
+    max-inline-size: 100%;
+    font-family: var(--font-heading);
+    font-size: var(--font-size-hero-eyebrow);
+    font-weight: var(--font-weight-strong);
+    text-transform: uppercase;
+
+    /* Hachures décoratives de la maquette, dessinées en CSS. */
+    &::after {
+      content: "";
+      flex-shrink: 0;
+      inline-size: var(--size-hero-stripes);
+      block-size: var(--space-control-inline);
+      background: repeating-linear-gradient(
+        -50deg,
+        transparent 0 0.3rem,
+        var(--color-accent) 0.3rem 0.65rem
+      );
+    }
+  }
+
+  .hero__tagline {
+    max-inline-size: 100%;
+    padding: var(--space-hero-tagline-block) var(--space-hero-tagline-inline);
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-hero-tagline);
+    font-style: italic;
+    font-weight: var(--font-weight-heading);
+    line-height: var(--line-height-heading);
+    letter-spacing: var(--letter-spacing-heading);
+    text-transform: uppercase;
+    text-wrap: balance;
+    clip-path: polygon(3% 0, 100% 0, 97% 100%, 0 100%);
+  }
+
+  .hero__infos {
+    padding-block-start: var(--space-control-block);
+    font-size: var(--font-size-hero-infos);
+    font-weight: var(--font-weight-strong);
+    text-transform: uppercase;
+  }
+
+  .hero__actions .btn {
+    justify-content: center;
+    min-block-size: var(--size-control);
+    border: var(--border-width-default) solid var(--color-accent);
+    color: var(--color-on-accent);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-strong);
+    text-align: center;
+
+    &:hover {
+      background-color: var(--color-accent-hover);
+    }
+
+    &.btn--secondary {
+      border-color: var(--color-hero-text);
+      background-color: transparent;
+      color: var(--color-hero-text);
+
+      &:hover {
+        background-color: var(--color-hero-text);
+        color: var(--color-on-accent);
+      }
+    }
+  }
+}

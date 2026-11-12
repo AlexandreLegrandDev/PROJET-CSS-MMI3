@@ -89,3 +89,38 @@
     gap: clamp(1rem, 4vw, 3rem);
   }
 }
+
+@layer layout {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-hero-gap);
+    padding: var(--space-hero-top) var(--space-hero-inline) var(--space-hero-bottom);
+
+    @media (width >= 48rem) {
+      min-block-size: var(--size-hero-desktop);
+      justify-content: center;
+      padding-block: var(--space-hero-top);
+      --font-size-hero-title: clamp(7rem, 13vw, 10rem);
+      --font-size-hero-tagline: clamp(2.5rem, 4.5vw, 3.75rem);
+    }
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-hero-gap);
+    inline-size: min(100%, var(--size-hero-actions-mobile));
+    align-self: center;
+    margin-block-start: var(--space-control-block);
+
+    @media (width >= 48rem) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      inline-size: auto;
+      align-self: flex-start;
+      gap: var(--space-control-inline);
+    }
+  }
+}
