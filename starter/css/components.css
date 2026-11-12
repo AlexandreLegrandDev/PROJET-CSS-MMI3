@@ -347,3 +347,100 @@
     }
   }
 }
+
+@layer components {
+  .site-footer {
+    background-color: var(--color-footer-surface);
+    color: var(--color-footer-text);
+    border-block-start: var(--border-width-default) solid var(--color-header-border);
+    text-align: center;
+    --color-focus: var(--color-accent);
+
+    & a {
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        color: var(--color-accent);
+      }
+    }
+
+    & p {
+      margin: 0;
+    }
+
+    @media (width >= 64rem) {
+      text-align: start;
+    }
+  }
+
+  .site-footer__logo {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-footer-logo);
+    font-weight: var(--font-weight-heading);
+    letter-spacing: var(--letter-spacing-display);
+    line-height: var(--line-height-heading);
+    white-space: nowrap;
+  }
+
+  .site-footer__tagline {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-footer-tagline);
+    font-style: italic;
+    font-weight: var(--font-weight-heading);
+    line-height: var(--line-height-control);
+    text-transform: uppercase;
+
+    & > span {
+      display: inline-block;
+      padding: var(--space-hero-tagline-block) var(--space-hero-tagline-inline);
+      background-color: var(--color-accent);
+      color: var(--color-on-accent);
+      clip-path: polygon(3% 0, 100% 0, 97% 100%, 0 100%);
+    }
+  }
+
+  .site-footer__contact {
+    font-size: var(--font-size-footer-contact);
+
+    & a {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-control-block);
+      max-inline-size: 100%;
+    }
+  }
+
+  .site-footer__icon {
+    inline-size: var(--size-footer-icon);
+    block-size: var(--size-footer-icon);
+    flex-shrink: 0;
+  }
+
+  .site-footer__links {
+    font-size: var(--font-size-footer-contact);
+
+    & > li {
+      margin: 0;
+    }
+
+    & > li + li::before {
+      content: "·";
+      margin-inline-end: var(--space-control-block);
+    }
+
+    & a {
+      display: inline-block;
+      text-underline-offset: var(--space-underline);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .site-footer__credits {
+    font-size: var(--font-size-footer-credits);
+    line-height: var(--line-height-body);
+  }
+}

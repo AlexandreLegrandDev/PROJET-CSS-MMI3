@@ -226,3 +226,19 @@
     --border-width-programme-pin: 2px;
   }
 }
+
+/* Footer : identité constante dans les deux thèmes, comme le header. */
+@layer base {
+  :root {
+    --color-footer-surface: var(--color-ink-950);
+    --color-footer-text: var(--color-cream-100);
+    --color-footer-border: var(--color-stone-300);
+    --space-footer-block: clamp(1rem, 2vw, 1.5rem);
+    --space-footer-gap: clamp(0.75rem, 2vw, 2rem);
+    --font-size-footer-logo: clamp(2.5rem, 4.3vw, 3.75rem);
+    --font-size-footer-tagline: clamp(1.25rem, 2vw, 1.75rem);
+    --font-size-footer-contact: 0.8125rem;
+    --font-size-footer-credits: 0.6875rem;
+    --size-footer-icon: 1rem;
+  }
+}
