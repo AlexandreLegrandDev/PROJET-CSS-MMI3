@@ -179,3 +179,18 @@
     gap: var(--space-control-block);
   }
 }
+
+@layer layout {
+  .faq {
+    display: grid;
+    gap: var(--space-faq-gap);
+    padding: var(--space-faq-block) var(--space-header-inline);
+
+    & > h2 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-faq-gap);
+    }
+  }
+}
