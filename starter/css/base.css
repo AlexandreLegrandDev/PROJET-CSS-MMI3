@@ -192,17 +192,6 @@
     outline-offset: var(--space-focus-offset);
   }
 
-  /* Exigence 6 : neutraliser les mouvements, y compris dans les autres layers.
-     Une priorité est nécessaire ici pour dépasser leurs futures animations. */
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation: none !important;
-      transition: none !important;
-      scroll-behavior: auto !important;
-    }
-  }
 }
 
 @layer base {

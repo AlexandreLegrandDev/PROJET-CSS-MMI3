@@ -9,7 +9,7 @@
 @layer layout {
   /* Conteneur centré à largeur maximale */
   .container {
-    inline-size: min(100% - 2 * var(--space-4), 72rem);
+    inline-size: min(100% - 2 * var(--space-container-gutter), var(--size-container));
     margin-inline: auto;
   }
 
@@ -52,11 +52,6 @@
       grid-area: jour2;
     }
   }
-
-  /* TODO : .site-header (Flexbox), .hero, grille des intervenants
-     (ex. repeat(auto-fit, minmax(16rem, 1fr))), billetterie, footer.
-     TODO (exigence 3) : déclarer le conteneur de votre container query,
-     ex. .speakers { container: speakers / inline-size; } */
 }
 
 @layer layout {
@@ -79,7 +74,7 @@
       display: inline-grid;
     }
 
-    @media (width >= 48rem) {
+    @media (width >= 64rem) {
       & > .site-header__nav {
         display: block;
         margin-inline-start: auto;
@@ -98,7 +93,7 @@
   .site-header__nav ul {
     display: flex;
     align-items: center;
-    gap: clamp(1rem, 4vw, 3rem);
+    gap: var(--space-nav-gap);
   }
 }
 
@@ -114,8 +109,8 @@
       min-block-size: var(--size-hero-desktop);
       justify-content: center;
       padding-block: var(--space-hero-top);
-      --font-size-hero-title: clamp(7rem, 13vw, 10rem);
-      --font-size-hero-tagline: clamp(2.5rem, 4.5vw, 3.75rem);
+      --font-size-hero-title: var(--font-size-hero-title-desktop);
+      --font-size-hero-tagline: var(--font-size-hero-tagline-desktop);
     }
   }
 
@@ -287,6 +282,9 @@
 
   .speakers__list {
     display: grid;
+    /* Le conteneur est la grille, pas ses enfants subgrid : le confinement
+       de mise en page d'un container individuel couperait leur héritage. */
+    container: artist-card / inline-size;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-artists-gap);
     margin-block-start: var(--space-artists-gap);
@@ -297,7 +295,6 @@
       grid-template-rows: subgrid;
       min-inline-size: 0;
       margin: 0;
-      container: artist-card / inline-size;
     }
 
     @media (width >= 48rem) {
@@ -356,5 +353,36 @@
       grid-area: role;
       align-self: start;
     }
+  }
+}
+
+@layer layout {
+  .artist-spotlight {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-artists-gap);
+    margin-block-start: var(--space-spotlight-block);
+    padding-block-start: var(--space-spotlight-block);
+
+    @media (width >= 64rem) {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    }
+  }
+
+  .artist-spotlight__container {
+    min-inline-size: 0;
+    container: artist-card / inline-size;
+  }
+
+  /* Hors de la grille des six artistes, la carte gère ses propres pistes. */
+  .artist-spotlight .card {
+    grid-row: auto;
+    grid-template-rows: auto auto 1fr auto;
+  }
+
+  .site-footer__image-credits {
+    grid-column: 1 / -1;
+    justify-self: stretch;
   }
 }

@@ -1,32 +1,8 @@
-/* ==========================================================================
-   tokens.css — Design tokens (rangés dans le layer « base »)
-   --------------------------------------------------------------------------
-   Deux niveaux :
-   1. PRIMITIFS : valeurs brutes (palette, échelles). Nommés d'après ce
-      qu'ils SONT : --color-violet-600, --space-4…
-      → jamais utilisés directement dans les composants.
-   2. SÉMANTIQUES : rôles. Nommés d'après ce qu'ils FONT : --color-surface,
-      --color-accent, --space-section…
-      → les seuls utilisés dans layout.css et components.css.
-   Changer de thème = modifier les sémantiques, pas les composants.
-   Les valeurs ci-dessous sont des EXEMPLES : remplacez-les par l'identité
-   de votre événement (exigence 1).
-   ========================================================================== */
-
+/* Design tokens Bass-Cour : primitifs puis rôles sémantiques.
+   Les autres feuilles ne consomment que les rôles sémantiques. */
 @layer base {
   :root {
-    /* ---------- 1. Primitifs ---------------------------------------- */
-
-    /* Palette (oklch : L = luminosité perçue, C = chroma, H = teinte) */
-    --color-sand-50: oklch(98% 0.01 85);
-    --color-sand-200: oklch(90% 0.03 85);
-    --color-night-900: oklch(20% 0.03 280);
-    --color-night-700: oklch(32% 0.04 280);
-    --color-violet-300: oklch(78% 0.12 300);
-    --color-violet-600: oklch(50% 0.2 300);
-    /* TODO : ajouter les teintes de votre palette (accent 2, succès, erreur…) */
-
-    /* Échelle d'espacements (base 0.25rem) */
+    /* Échelles primitives. */
     --space-1: 0.25rem;
     --space-2: 0.5rem;
     --space-3: 0.75rem;
@@ -34,54 +10,12 @@
     --space-6: 1.5rem;
     --space-8: 2rem;
     --space-12: 3rem;
-
-    /* Rayons, durées, courbes */
     --radius-s: 0.25rem;
     --radius-m: 0.75rem;
     --duration-fast: 150ms;
     --duration-base: 300ms;
     --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
 
-    /* Typographie */
-    --font-sans: system-ui, sans-serif;
-    /* TODO : police de titre (Google Fonts via <link> dans index.html) */
-
-    /* ---------- 2. Sémantiques -------------------------------------- */
-
-    /* Indispensable pour que light-dark() bascule et que les éléments
-       natifs (champs, barres de défilement) suivent le thème. */
-    color-scheme: light dark;
-
-    /* light-dark(valeur en thème clair, valeur en thème sombre) */
-    --color-surface: light-dark(var(--color-sand-50), var(--color-night-900));
-    --color-surface-raised: light-dark(white, var(--color-night-700));
-    --color-text: light-dark(var(--color-night-900), var(--color-sand-50));
-    --color-accent: light-dark(var(--color-violet-600), var(--color-violet-300));
-    --color-focus: var(--color-accent);
-    /* TODO : --color-text-muted, --color-border, --color-on-accent…
-       (vérifier les contrastes AA dans les DEUX thèmes) */
-
-    /* Typographie fluide : clamp(minimum, valeur préférée, maximum) */
-    --font-size-body: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-    --font-size-h1: clamp(2.25rem, 1.5rem + 4vw, 4.5rem);
-    /* TODO : --font-size-h2, --font-size-h3 */
-
-    --space-section: clamp(var(--space-8), 5vw, var(--space-12));
-    --radius-card: var(--radius-m);
-    /* TODO : --duration-hover, --space-card… */
-  }
-
-  /* BONUS TECHNIQUE (exigence 5) — bascule CSS-only, à décommenter si vous ajoutez
-     <input type="checkbox" id="theme-toggle"> dans le header :
-  :root:has(#theme-toggle:checked) {
-    color-scheme: dark;
-  }
-  */
-}
-
-/* Identité Bass-Cour et rôles utilisés par les éléments de base. */
-@layer base {
-  :root {
     /* Primitifs : crème, noir légèrement végétal et vert électrique. */
     --color-cream-100: #f3eedb;
     --color-cream-200: #e4dec9;
@@ -109,8 +43,7 @@
     --color-selection: var(--color-lime-400);
     --color-on-selection: var(--color-ink-950);
 
-    /* Les polices nommées seront chargées à l'étape dédiée aux ressources.
-       Les polices locales de repli rendent déjà le contraste des familles. */
+    /* Polices chargées par les liens Google Fonts dans index.html. */
     --font-sans: "Space Grotesk", Arial, sans-serif;
     --font-heading: "Barlow Condensed", Impact, "Arial Narrow", sans-serif;
     --font-size-body: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
@@ -147,11 +80,8 @@
     --duration-hover: var(--duration-fast);
     --ease-interaction: var(--ease-out);
     --opacity-disabled: 0.55;
-  }
-}
 
-@layer base {
-  :root {
+
     --color-header-surface: var(--color-ink-950);
     --color-header-text: var(--color-cream-100);
     --color-header-border: var(--color-stone-600);
@@ -169,21 +99,10 @@
     --size-menu-icon: 1.5rem;
     --size-menu-width: 22rem;
     --space-menu-edge: 1rem;
-  }
 
-  /* État initial clair : le bouton choisit explicitement le thème sombre. */
-  :root {
-    color-scheme: light;
-  }
 
-  :root:has(#theme-toggle:checked) {
-    color-scheme: dark;
-  }
-}
 
-/* Hero : dimensions de départ pour mobile, puis disposition desktop. */
-@layer base {
-  :root {
+
     --color-hero-surface: var(--color-ink-950);
     --color-hero-text: var(--color-cream-100);
     --space-hero-inline: var(--space-header-inline);
@@ -199,12 +118,8 @@
     --space-hero-tagline-inline: 0.65em;
     --space-hero-tagline-block: 0.1em;
     --size-hero-stripes: clamp(2rem, 8vw, 6rem);
-  }
-}
 
-/* Programme : rôles partagés par la grille et ses deux journées. */
-@layer base {
-  :root {
+
     --color-programme-surface: var(--color-surface);
     --color-programme-text: var(--color-text);
     --color-programme-day: var(--color-olive-700);
@@ -224,12 +139,8 @@
     --size-programme-stripes: clamp(2rem, 12vw, 11rem);
     --size-programme-pin: 0.625em;
     --border-width-programme-pin: 2px;
-  }
-}
 
-/* Footer : identité constante dans les deux thèmes, comme le header. */
-@layer base {
-  :root {
+
     --color-footer-surface: var(--color-ink-950);
     --color-footer-text: var(--color-cream-100);
     --color-footer-border: var(--color-stone-300);
@@ -240,12 +151,8 @@
     --font-size-footer-contact: 0.8125rem;
     --font-size-footer-credits: 0.6875rem;
     --size-footer-icon: 1rem;
-  }
-}
 
-/* FAQ : fond sombre et réponses sur un aplat olive, dans les deux thèmes. */
-@layer base {
-  :root {
+
     --color-faq-surface: var(--color-ink-950);
     --color-faq-text: var(--color-cream-100);
     --color-faq-border: var(--color-stone-300);
@@ -262,11 +169,8 @@
     --border-width-faq-indicator: 2px;
     --space-faq-focus-inset: -4px;
     --space-faq-reveal: 0.25rem;
-  }
-}
 
-@layer base {
-  :root {
+
     --color-tickets-surface: var(--color-surface);
     --color-tickets-text: var(--color-text);
     --color-offer-surface: var(--color-surface);
@@ -286,12 +190,8 @@
     --size-offer-notch: 1rem;
     --position-offer-notch: 3.75rem;
     --size-offer-radius: 0.5rem;
-  }
-}
 
-/* Artistes : les visuels restent à ajouter par l'auteur du site. */
-@layer base {
-  :root {
+
     --color-artists-surface: var(--color-ink-950);
     --color-artists-text: var(--color-cream-100);
     --color-card-border: var(--color-stone-300);
@@ -311,18 +211,54 @@
     --size-card-number-height: 2.25rem;
     --size-card-number-hole: 0.25rem;
     --space-card-number-hole: 0.2rem;
-    --aspect-card-visual: 3.7;
     --size-card-visual-height: clamp(3rem, 9vw, 6rem);
-  }
-}
 
-/* Mouvements courts, sans boucle ni modification des dimensions. */
-@layer base {
-  :root {
+
     --duration-entrance: 450ms;
     --duration-menu: 180ms;
     --delay-entrance-step: 60ms;
     --distance-entrance: 0.375rem;
     --distance-hover: -2px;
+
+    /* Rôles complémentaires : boutons, géométrie et second contexte de carte. */
+    --space-section: clamp(2rem, 5vw, 3rem);
+    --space-button-block: var(--space-3);
+    --space-button-inline: var(--space-6);
+    --space-container-gutter: var(--space-4);
+    --size-container: 72rem;
+    --duration-disclosure: var(--duration-base);
+    --space-nav-gap: clamp(1rem, 4vw, 3rem);
+    --font-size-hero-title-desktop: clamp(7rem, 13vw, 10rem);
+    --font-size-hero-tagline-desktop: clamp(2.5rem, 4.5vw, 3.75rem);
+    --color-featured-border: var(--color-ink-950);
+    --color-hero-overlay: rgb(18 21 14 / 85%);
+    --color-hero-clear: rgb(18 21 14 / 25%);
+    --font-size-card-number-wide: 1.75rem;
+    --size-card-number-width-wide: 2.75rem;
+    --size-card-number-height-wide: 3.5rem;
+    --space-check-top: 0.35em;
+    --size-check-width: 0.65em;
+    --size-check-height: 0.35em;
+    --space-stripe-clear: 0.4rem;
+    --space-stripe-color: 0.9rem;
+    --space-hero-stripe-clear: 0.3rem;
+    --space-hero-stripe-color: 0.65rem;
+    --size-icon: 1em;
+    --size-spotlight-card: 19rem;
+    --space-spotlight-block: clamp(1.5rem, 3vw, 2.5rem);
+    --font-size-spotlight-heading: clamp(1.75rem, 3vw, 2.75rem);
+
+    color-scheme: light;
+  }
+
+  /* Bascule native : light-dark() suit le color-scheme calculé. */
+  :root:has(#theme-toggle:checked) {
+    color-scheme: dark;
+  }
+}
+
+@layer base {
+  :root {
+    --size-target-min: 1.5rem;
   }
 }

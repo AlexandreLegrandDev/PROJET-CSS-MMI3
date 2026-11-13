@@ -16,6 +16,26 @@
     clip-path: inset(50%);
     white-space: nowrap;
   }
+}
 
-  /* TODO : .u-text-center, .u-stack… (uniquement si vraiment utiles) */
+@layer utilities {
+  /* Préférence globale d'accessibilité : ce dernier layer neutralise les
+     mouvements des composants sans !important et sans cacher leur contenu. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none;
+      transition: none;
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer utilities {
+  @media (prefers-reduced-motion: reduce) {
+    :is(.btn, .card, .offer):hover {
+      translate: none;
+    }
+  }
 }

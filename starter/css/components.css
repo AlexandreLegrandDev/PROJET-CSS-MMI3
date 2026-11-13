@@ -10,27 +10,22 @@
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-3) var(--space-6);
-    border-radius: var(--radius-s);
+    gap: var(--space-control-block);
+    padding: var(--space-button-block) var(--space-button-inline);
+    border-radius: var(--radius-control);
     background-color: var(--color-accent);
     color: var(--color-surface);
     text-decoration: none;
-    transition: translate var(--duration-fast) var(--ease-out);
+    transition: translate var(--duration-hover) var(--ease-interaction);
 
     &:hover {
-      translate: 0 -2px;
+      translate: 0 var(--distance-hover);
     }
 
     @media (prefers-reduced-motion: reduce) {
       transition: none;
     }
   }
-
-  /* TODO : .card (subgrid : grid-row: span N; grid-template-rows: subgrid;)
-     TODO : @container speakers (inline-size > 40rem) { .card { … } }
-     TODO : .offer et .offer:has(.offer__badge) (exigence 4)
-     TODO : .faq-item (details/summary), .nav, @keyframes… */
 }
 
 @layer components {
@@ -147,7 +142,7 @@
       padding-inline: var(--space-control-inline);
     }
 
-    @media (width >= 48rem) {
+    @media (width >= 64rem) {
       &:popover-open {
         display: none;
       }
@@ -160,7 +155,7 @@
     background-color: var(--color-hero-surface);
     color: var(--color-hero-text);
     --color-focus: var(--color-accent);
-    background-image: url("https://static.vecteezy.com/ti/photos-gratuite/p1/48637923-grange-dans-prairie-en-dessous-de-nuit-ciel-gratuit-photo.jpg");
+    background-image: linear-gradient(var(--color-hero-overlay), var(--color-hero-overlay)), url("https://static.vecteezy.com/ti/photos-gratuite/p1/48637923-grange-dans-prairie-en-dessous-de-nuit-ciel-gratuit-photo.jpg");
     background-size: cover;
     background-position: center bottom;
     background-repeat: no-repeat;
@@ -195,8 +190,8 @@
       block-size: var(--space-control-inline);
       background: repeating-linear-gradient(
         -50deg,
-        transparent 0 0.3rem,
-        var(--color-accent) 0.3rem 0.65rem
+        transparent 0 var(--space-hero-stripe-clear),
+        var(--color-accent) var(--space-hero-stripe-clear) var(--space-hero-stripe-color)
       );
     }
   }
@@ -278,8 +273,8 @@
         margin-inline-start: auto;
         background: repeating-linear-gradient(
           -45deg,
-          transparent 0 0.4rem,
-          var(--color-programme-stripes) 0.4rem 0.9rem
+          transparent 0 var(--space-stripe-clear),
+          var(--color-programme-stripes) var(--space-stripe-clear) var(--space-stripe-color)
         );
       }
     }
@@ -301,8 +296,8 @@
   }
 
   .programme__calendar {
-    inline-size: 1em;
-    block-size: 1em;
+    inline-size: var(--size-icon);
+    block-size: var(--size-icon);
     flex-shrink: 0;
   }
 
@@ -333,18 +328,21 @@
         align-items: center;
         gap: var(--space-control-block);
 
-        /* Repère de lieu décoratif ; le nom reste du texte accessible. */
-        &::before {
-          content: "";
-          flex-shrink: 0;
-          inline-size: var(--size-programme-pin);
-          block-size: var(--size-programme-pin);
-          border: var(--border-width-programme-pin) solid currentColor;
-          border-radius: 50% 50% 0 50%;
-          rotate: 45deg;
-        }
       }
     }
+  }
+}
+
+@layer components {
+  /* Sélecteur séparé pour limiter le nesting à trois niveaux. */
+  .programme__creneaux > li > span::before {
+    content: "";
+    flex-shrink: 0;
+    inline-size: var(--size-programme-pin);
+    block-size: var(--size-programme-pin);
+    border: var(--border-width-programme-pin) solid currentColor;
+    border-radius: 50% 50% 0 50%;
+    rotate: 45deg;
   }
 }
 
@@ -450,6 +448,8 @@
     background-color: var(--color-faq-surface);
     color: var(--color-faq-text);
     --color-focus: var(--color-accent);
+    --color-link: var(--color-accent);
+    --color-link-hover: var(--color-artists-text);
 
     & > h2 {
       min-inline-size: 0;
@@ -461,8 +461,8 @@
         block-size: var(--space-control-inline);
         background: repeating-linear-gradient(
           -45deg,
-          transparent 0 0.4rem,
-          var(--color-accent) 0.4rem 0.9rem
+          transparent 0 var(--space-stripe-clear),
+          var(--color-accent) var(--space-stripe-clear) var(--space-stripe-color)
         );
       }
     }
@@ -539,7 +539,7 @@
     }
 
     &[open] > p {
-      animation: faq-reveal var(--duration-base) var(--ease-interaction);
+      animation: faq-reveal var(--duration-disclosure) var(--ease-interaction);
     }
   }
 
@@ -566,7 +566,7 @@
       flex: 0 0 var(--size-faq-stripes);
       block-size: var(--space-control-inline);
       background: repeating-linear-gradient(-45deg,
-        transparent 0 0.4rem, var(--color-programme-stripes) 0.4rem 0.9rem);
+        transparent 0 var(--space-stripe-clear), var(--color-programme-stripes) var(--space-stripe-clear) var(--space-stripe-color));
     }
   }
 
@@ -581,8 +581,8 @@
     &:has(.offer__badge) {
       --color-offer-surface: var(--color-accent);
       --color-offer-text: var(--color-on-accent);
-      --color-focus: var(--color-ink-950);
-      --color-offer-border: var(--color-ink-950);
+      --color-focus: var(--color-featured-border);
+      --color-offer-border: var(--color-featured-border);
     }
 
     /* Encoches de billet, sans découper le texte ni les contours de focus. */
@@ -630,9 +630,9 @@
         content: "";
         position: absolute;
         inset-inline-start: 0;
-        inset-block-start: 0.35em;
-        inline-size: 0.65em;
-        block-size: 0.35em;
+        inset-block-start: var(--space-check-top);
+        inline-size: var(--size-check-width);
+        block-size: var(--size-check-height);
         border-inline-start: var(--border-width-faq-indicator) solid currentColor;
         border-block-end: var(--border-width-faq-indicator) solid currentColor;
         rotate: -45deg;
@@ -696,7 +696,7 @@
         flex: 0 0 var(--size-faq-stripes);
         block-size: var(--space-control-inline);
         background: repeating-linear-gradient(-45deg,
-          transparent 0 0.4rem, var(--color-accent) 0.4rem 0.9rem);
+          transparent 0 var(--space-stripe-clear), var(--color-accent) var(--space-stripe-clear) var(--space-stripe-color));
       }
     }
   }
@@ -848,14 +848,14 @@
   }
 
   /* La même carte s'adapte à la largeur disponible, en mobile et desktop. */
-  @container artist-card (inline-size >= 16rem) {
+  @container artist-card (inline-size >= 40rem) {
     .card {
       font-size: var(--font-size-card-body-wide);
       --font-size-card-title: var(--font-size-card-title-wide);
       --font-size-card-role: var(--font-size-card-body-wide);
-      --size-card-number-width: 2.75rem;
-      --size-card-number-height: 3.5rem;
-      --font-size-card-number: 1.75rem;
+      --size-card-number-width: var(--size-card-number-width-wide);
+      --size-card-number-height: var(--size-card-number-height-wide);
+      --font-size-card-number: var(--font-size-card-number-wide);
     }
   }
 }
@@ -933,5 +933,87 @@
       opacity: 1;
       translate: 0 0;
     }
+  }
+}
+
+@layer components {
+  .artist-spotlight {
+    border-block-start: var(--border-width-default) solid var(--color-card-border);
+  }
+
+  .artist-spotlight__eyebrow {
+    color: var(--color-accent);
+    font-weight: var(--font-weight-strong);
+    text-transform: uppercase;
+  }
+
+  .artist-spotlight__intro h3 {
+    margin-block: var(--space-card-content);
+    font-size: var(--font-size-spotlight-heading);
+  }
+
+  .artist-spotlight__intro p {
+    max-inline-size: 45ch;
+  }
+
+  /* Deuxième contexte : une carte large devient horizontale, indépendamment
+     du viewport. Les cartes de la grille gardent leur disposition verticale. */
+  @container artist-card (inline-size >= 28rem) {
+    .artist-spotlight .card {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .artist-spotlight .card > .card__visual {
+      grid-column: 1;
+      grid-row: 1 / 4;
+      block-size: 100%;
+      min-block-size: var(--size-card-visual-height);
+      align-self: stretch;
+      border-block-end: 0;
+      border-inline-end: var(--border-width-default) solid var(--color-card-border);
+    }
+
+    .artist-spotlight .card > .card__header {
+      grid-column: 2;
+      grid-row: 1;
+      padding-block-start: var(--space-card-content);
+    }
+
+    .artist-spotlight .card > .card__bio {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .artist-spotlight .card > .card__details {
+      grid-column: 2;
+      grid-row: 3;
+    }
+  }
+
+  .site-footer__image-credits {
+    border: 0;
+    font-size: var(--font-size-footer-contact);
+
+    & > summary {
+      min-block-size: var(--size-control);
+      padding-inline: 0;
+    }
+
+    & > p {
+      padding: var(--space-card-content) 0;
+    }
+
+    & a {
+      text-decoration: underline;
+    }
+  }
+}
+
+@layer components {
+  :is(.site-footer, .card__details p) a {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--size-target-min);
   }
 }

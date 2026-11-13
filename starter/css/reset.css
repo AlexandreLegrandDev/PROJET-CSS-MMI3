@@ -33,6 +33,4 @@
   :where(input, button, textarea, select) {
     font: inherit;
   }
-
-  /* TODO : compléter si besoin (ex. text-size-adjust, overflow-wrap…). */
 }
