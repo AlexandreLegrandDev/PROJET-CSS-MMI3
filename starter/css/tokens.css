@@ -315,3 +315,14 @@
     --size-card-visual-height: clamp(3rem, 9vw, 6rem);
   }
 }
+
+/* Mouvements courts, sans boucle ni modification des dimensions. */
+@layer base {
+  :root {
+    --duration-entrance: 450ms;
+    --duration-menu: 180ms;
+    --delay-entrance-step: 60ms;
+    --distance-entrance: 0.375rem;
+    --distance-hover: -2px;
+  }
+}
