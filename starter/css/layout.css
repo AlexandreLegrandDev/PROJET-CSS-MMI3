@@ -313,6 +313,28 @@
     min-inline-size: 0;
   }
 
+  /* Chaque contenu occupe une ligne distincte du subgrid. La hauteur
+     explicite du visuel contribue au calcul de la première ligne. */
+  .card > .card__visual {
+    grid-row: 1;
+    inline-size: 100%;
+    min-inline-size: 0;
+    block-size: var(--size-card-visual-height);
+    align-self: start;
+  }
+
+  .card > .card__header {
+    grid-row: 2;
+  }
+
+  .card > .card__bio {
+    grid-row: 3;
+  }
+
+  .card > .card__details {
+    grid-row: 4;
+  }
+
   .card__header {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);

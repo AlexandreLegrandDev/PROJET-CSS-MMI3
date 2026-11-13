@@ -312,5 +312,6 @@
     --size-card-number-hole: 0.25rem;
     --space-card-number-hole: 0.2rem;
     --aspect-card-visual: 3.7;
+    --size-card-visual-height: clamp(3rem, 9vw, 6rem);
   }
 }

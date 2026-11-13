@@ -717,22 +717,59 @@
   }
 
   .card__visual {
-    /* Emplacement vide : ajouter une image dans le HTML ou un background-image
-       sur les variantes .card__visual--01 à --06. Aucun fichier n'est chargé. */
-    aspect-ratio: var(--aspect-card-visual);
+    /* La hauteur est réservée dans layout.css : l'image de fond est
+       recadrée à l'intérieur et ne détermine jamais la taille de la ligne. */
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: auto;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-clip: padding-box;
     border-block-end: var(--border-width-default) solid var(--color-card-border);
     border-start-start-radius: inherit;
     border-start-end-radius: inherit;
 
     & > img {
+      position: absolute;
+      inset: 0;
       inline-size: 100%;
       block-size: 100%;
       object-fit: cover;
       border-radius: inherit;
     }
+  }
+
+  .card__visual--01 {
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWA6Qlg4hnaiJhSm2MTGTX8pN1W-hAyCwGlbfTNiKaGg&s=10);
+    background-size: cover;
+    background-position: 100% 30%;
+  }
+
+  .card__visual--02 {
+    background-image: url(https://img.magnific.com/photos-gratuite/portrait-mouton-tant-qu-homme-affaires_23-2151195510.jpg);
+    background-size: cover;
+    background-position: 100% 20%;
+  }
+
+  .card__visual--03 {
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkl1tKvDjz6QAVq9lKdxxH8kOfhdrVTyUJSFf051gtHA&s=10);
+    background-position: 100% 20%;
+  }
+
+  .card__visual--04 {
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJQabMAgY_o_aOISk_NeyyuIs_UeAunNw5Dqjx4paPjg&s=10);
+    background-position: 100% 10%;
+  }
+
+  .card__visual--05 {
+    background-image: url(https://img.magnific.com/premium-photo/pig-business-suit-animal-businessman-funny-boss-pig-headed-man-formal-business-suit_162695-30240.jpg?semt=ais_hybrid&w=740&q=80);
+    background-position: 100% 30%;
+  }
+
+  .card__visual--06 {
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6lwAdybzn40XqFPw0DypM-9dYbDkci1r4RfiwWJrFMeiofAYTGQpQjUYC&s=10);
+    background-position: 100% 30%;
   }
 
   .card__header h3 {
