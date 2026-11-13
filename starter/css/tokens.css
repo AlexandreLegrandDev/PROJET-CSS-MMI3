@@ -264,3 +264,27 @@
     --space-faq-reveal: 0.25rem;
   }
 }
+
+@layer base {
+  :root {
+    --color-tickets-surface: var(--color-surface);
+    --color-tickets-text: var(--color-text);
+    --color-offer-surface: var(--color-surface);
+    --color-offer-text: var(--color-text);
+    --color-offer-border: var(--color-border);
+    --color-offer-button: var(--color-ink-950);
+    --color-offer-button-text: var(--color-cream-100);
+    --space-tickets-block: clamp(1rem, 2.5vw, 2rem);
+    --space-tickets-gap: clamp(1.25rem, 2.5vw, 2rem);
+    --space-offer: clamp(0.75rem, 2vw, 1.5rem);
+    --space-offer-gap: 0.375rem;
+    --space-offer-badge: 0.75rem;
+    --font-size-offer-title: clamp(1.25rem, 2.3vw, 2rem);
+    --font-size-offer-price: clamp(2.25rem, 3.5vw, 3.25rem);
+    --font-size-offer-body: clamp(0.75rem, 1.3vw, 1rem);
+    --font-size-offer-badge: 1rem;
+    --size-offer-notch: 1rem;
+    --position-offer-notch: 3.75rem;
+    --size-offer-radius: 0.5rem;
+  }
+}

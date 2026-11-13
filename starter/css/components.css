@@ -555,3 +555,129 @@
     }
   }
 }
+
+@layer components {
+  .tickets {
+    background-color: var(--color-tickets-surface);
+    color: var(--color-tickets-text);
+
+    & > h2::after {
+      content: "";
+      flex: 0 0 var(--size-faq-stripes);
+      block-size: var(--space-control-inline);
+      background: repeating-linear-gradient(-45deg,
+        transparent 0 0.4rem, var(--color-programme-stripes) 0.4rem 0.9rem);
+    }
+  }
+
+  .offer {
+    position: relative;
+    background-color: var(--color-offer-surface);
+    color: var(--color-offer-text);
+    border: var(--border-width-default) solid var(--color-offer-border);
+    border-radius: var(--size-offer-radius);
+
+    /* :has() met en avant l'offre portant le badge (exigence 4). */
+    &:has(.offer__badge) {
+      --color-offer-surface: var(--color-accent);
+      --color-offer-text: var(--color-on-accent);
+      --color-focus: var(--color-ink-950);
+      --color-offer-border: var(--color-ink-950);
+    }
+
+    /* Encoches de billet, sans découper le texte ni les contours de focus. */
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      inset-block-end: var(--position-offer-notch);
+      inline-size: var(--size-offer-notch);
+      block-size: var(--size-offer-notch);
+      border: var(--border-width-default) solid var(--color-offer-border);
+      border-radius: 50%;
+      background-color: var(--color-tickets-surface);
+      pointer-events: none;
+    }
+
+    &::before {
+      inset-inline-start: calc(var(--size-offer-notch) / -2);
+      border-inline-start-color: transparent;
+    }
+
+    &::after {
+      inset-inline-end: calc(var(--size-offer-notch) / -2);
+      border-inline-end-color: transparent;
+    }
+
+    & > h3 {
+      font-size: var(--font-size-offer-title);
+    }
+
+    & > ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: var(--font-size-offer-body);
+      text-align: start;
+
+      & > li {
+        position: relative;
+        padding-inline-start: var(--space-list-indent);
+        margin-block-start: 0;
+      }
+
+      & > li::before {
+        content: "";
+        position: absolute;
+        inset-inline-start: 0;
+        inset-block-start: 0.35em;
+        inline-size: 0.65em;
+        block-size: 0.35em;
+        border-inline-start: var(--border-width-faq-indicator) solid currentColor;
+        border-block-end: var(--border-width-faq-indicator) solid currentColor;
+        rotate: -45deg;
+      }
+    }
+
+    & > .btn {
+      max-inline-size: 100%;
+      min-block-size: var(--size-control);
+      background-color: var(--color-offer-button);
+      color: var(--color-offer-button-text);
+      font-size: var(--font-size-small);
+      font-weight: var(--font-weight-strong);
+      text-align: center;
+
+      &:hover {
+        background-color: var(--color-header-border);
+        color: var(--color-offer-button-text);
+      }
+    }
+  }
+
+  .offer__price {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: var(--font-size-offer-price);
+    font-weight: var(--font-weight-heading);
+    line-height: var(--line-height-heading);
+  }
+
+  .offer__badge {
+    position: absolute;
+    inset-block-start: calc(-1 * var(--space-offer-badge));
+    inset-inline-start: 50%;
+    translate: -50% 0;
+    max-inline-size: calc(100% - 2 * var(--space-offer));
+    margin: 0;
+    padding-inline: var(--space-control-block);
+    border-radius: var(--radius-control);
+    background-color: var(--color-offer-button);
+    color: var(--color-accent);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-offer-badge);
+    font-weight: var(--font-weight-heading);
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
