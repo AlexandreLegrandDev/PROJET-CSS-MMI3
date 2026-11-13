@@ -681,3 +681,144 @@
     text-transform: uppercase;
   }
 }
+
+@layer components {
+  .speakers {
+    background-color: var(--color-artists-surface);
+    color: var(--color-artists-text);
+    --color-focus: var(--color-accent);
+
+    & > h2 {
+      font-size: var(--font-size-artists-title);
+
+      &::after {
+        content: "";
+        flex: 0 0 var(--size-faq-stripes);
+        block-size: var(--space-control-inline);
+        background: repeating-linear-gradient(-45deg,
+          transparent 0 0.4rem, var(--color-accent) 0.4rem 0.9rem);
+      }
+    }
+  }
+
+  .speakers__intro {
+    margin-block-start: var(--space-card-content);
+    font-size: var(--font-size-artists-intro);
+    font-weight: var(--font-weight-strong);
+  }
+
+  .card {
+    border: var(--border-width-default) solid var(--color-card-border);
+    border-radius: var(--radius-control);
+    background-color: var(--color-artists-surface);
+    color: var(--color-artists-text);
+    font-size: var(--font-size-card-body);
+    line-height: var(--line-height-body);
+  }
+
+  .card__visual {
+    /* Emplacement vide : ajouter une image dans le HTML ou un background-image
+       sur les variantes .card__visual--01 à --06. Aucun fichier n'est chargé. */
+    aspect-ratio: var(--aspect-card-visual);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-block-end: var(--border-width-default) solid var(--color-card-border);
+    border-start-start-radius: inherit;
+    border-start-end-radius: inherit;
+
+    & > img {
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+    }
+  }
+
+  .card__header h3 {
+    font-size: var(--font-size-card-title);
+  }
+
+  .card__number {
+    position: relative;
+    display: grid;
+    place-items: center;
+    inline-size: var(--size-card-number-width);
+    min-block-size: var(--size-card-number-height);
+    padding-block-start: var(--space-card-content);
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-card-number);
+    font-weight: var(--font-weight-heading);
+    clip-path: polygon(35% 0, 65% 0, 72% 22%, 100% 38%, 100% 100%, 0 100%, 0 38%, 28% 22%);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset-block-start: var(--space-card-number-hole);
+      inset-inline-start: calc(50% - var(--size-card-number-hole) / 2);
+      inline-size: var(--size-card-number-hole);
+      block-size: var(--size-card-number-hole);
+      border-radius: 50%;
+      background-color: var(--color-artists-surface);
+    }
+  }
+
+  .card__role {
+    margin: 0;
+    color: var(--color-accent);
+    font-size: var(--font-size-card-role);
+  }
+
+  .card__bio {
+    margin-inline: var(--space-card-inline);
+    padding-block-start: var(--space-card-content);
+    border-block-start: var(--border-width-default) solid var(--color-card-border);
+  }
+
+  .card__details {
+    margin: 0 var(--space-card-inline) var(--space-card-content);
+    border: 0;
+    border-radius: 0;
+
+    & > summary {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-card-content);
+      min-block-size: var(--size-control);
+      padding: 0;
+      color: var(--color-accent);
+      font-weight: var(--font-weight-strong);
+      list-style: none;
+      text-decoration: underline;
+      text-underline-offset: var(--space-underline);
+      transition: color var(--duration-hover) var(--ease-interaction);
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      &:hover {
+        color: var(--color-artists-text);
+      }
+    }
+
+    & > p {
+      padding: var(--space-card-content) 0;
+    }
+  }
+
+  /* La même carte s'adapte à la largeur disponible, en mobile et desktop. */
+  @container artist-card (inline-size >= 16rem) {
+    .card {
+      font-size: var(--font-size-card-body-wide);
+      --font-size-card-title: var(--font-size-card-title-wide);
+      --font-size-card-role: var(--font-size-card-body-wide);
+      --size-card-number-width: 2.75rem;
+      --size-card-number-height: 3.5rem;
+      --font-size-card-number: 1.75rem;
+    }
+  }
+}

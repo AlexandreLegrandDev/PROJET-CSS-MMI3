@@ -288,3 +288,29 @@
     --size-offer-radius: 0.5rem;
   }
 }
+
+/* Artistes : les visuels restent à ajouter par l'auteur du site. */
+@layer base {
+  :root {
+    --color-artists-surface: var(--color-ink-950);
+    --color-artists-text: var(--color-cream-100);
+    --color-card-border: var(--color-stone-300);
+    --space-artists-block: clamp(1rem, 2.5vw, 2rem);
+    --space-artists-gap: clamp(0.75rem, 2vw, 1.5rem);
+    --space-card-content: 0.5rem;
+    --space-card-inline: clamp(0.5rem, 1.5vw, 1.25rem);
+    --font-size-artists-title: clamp(1.75rem, 4.4vw, 3.75rem);
+    --font-size-artists-intro: clamp(0.875rem, 2vw, 1.375rem);
+    --font-size-card-title: 1.125rem;
+    --font-size-card-title-wide: 2rem;
+    --font-size-card-body: 0.75rem;
+    --font-size-card-body-wide: 1rem;
+    --font-size-card-role: 0.75rem;
+    --font-size-card-number: 1.125rem;
+    --size-card-number-width: 1.75rem;
+    --size-card-number-height: 2.25rem;
+    --size-card-number-hole: 0.25rem;
+    --space-card-number-hole: 0.2rem;
+    --aspect-card-visual: 3.7;
+  }
+}
